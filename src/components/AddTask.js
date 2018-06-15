@@ -22,6 +22,15 @@ export default class AddTasks extends React.Component {
 
   // still leave ES6 syntax for methods like render and life sycle methods like componentDidMount
   render() {
-    return <h2>Add Task</h2>;
+    return (
+      <div>
+        <h2>Add Task</h2>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.handleAddTask}>
+          <input type="text" name="task" />
+          <button>Add Task</button>
+        </form>
+      </div>
+    );
   }
 }
