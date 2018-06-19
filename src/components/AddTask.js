@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default class AddTasks extends React.Component {
   // transform class properties plugin (state out of constructor)
@@ -6,7 +6,8 @@ export default class AddTasks extends React.Component {
     error: undefined
   };
 
-  // transform class properties plugin (convert event handlers to class properties (arrow functions) cto prevent binding of this in constructor)
+  // transform class properties plugin (convert event handlers to class properties
+  // (arrow functions) cto prevent binding of this in constructor)
   handleAddTask = e => {
     e.preventDefault();
 
@@ -16,7 +17,7 @@ export default class AddTasks extends React.Component {
     this.setState(() => ({ error }));
 
     if (!error) {
-      e.target.elements.task.value = "";
+      e.target.elements.task.value = '';
     }
   };
 
