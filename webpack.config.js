@@ -1,22 +1,29 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
 
-  entry: "./src/app.js",
+  entry: './src/components/Login.js',
 
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "bundel.js"
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundel.js'
   },
 
   module: {
-    rules: [{ test: /\.js$/, loader: "babel-loader", exclude: /node_modules/ }]
+    rules: [
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      /* {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: 'eslint-loader',
+      } */
+    ]
   },
 
-  devtool: "cheap-module-eval-source-map",
+  devtool: 'cheap-module-eval-source-map',
 
   devServer: {
-    contentBase: path.resolve(__dirname, "public")
+    contentBase: path.resolve(__dirname, 'public')
   }
 };
