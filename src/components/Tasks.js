@@ -12,7 +12,11 @@ const Tasks = props => (
     <ul>
       {props.tasks.map(task => (
         <li key={task}>
-          <Task taskName={task} hanleDeleteTask={props.hanleDeleteTask} />
+          <Task
+            taskName={task}
+            hanleDeleteTask={props.hanleDeleteTask}
+            openTaskDetailsModal={props.openTaskDetailsModal}
+          />
         </li>
       ))}
     </ul>

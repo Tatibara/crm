@@ -1,17 +1,40 @@
 import React from 'react';
+import DetailsModal from './DetailsModal';
 
-const Task = props => (
-  <div>
-    Task: {props.taskName}
-    <button
-      onClick={e => {
-        e.preventDefault();
-        props.hanleDeleteTask(props.taskName);
-      }}
-    >
-      Delete Task
-    </button>
-  </div>
-);
+export default class Task extends React.Component {
+  state = {
+    isModalOpen: false
+  };
 
-export default Task;
+  openTaskDetailsModal = () => {
+    this.setState(() => ({ isModalOpen: true }));
+  };
+
+  closeTaskDetailsModal = () => {
+    this.setState(() => ({
+      isModalOpen: false
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        Task: {this.props.taskName}
+        <button
+          onClick={e => {
+            e.preventDefault();
+            this.props.hanleDeleteTask(this.props.taskName);
+          }}
+        >
+          Delete Task
+        </button>
+        <button onClick={this.openTaskDetailsModal}>Details</button>
+        <DetailsModal
+          isOpen={this.state.isModalOpen}
+          closeTaskDetailsModal={this.closeTaskDetailsModal}
+          taskName={this.props.taskName}
+        />
+      </div>
+    );
+  }
+}
