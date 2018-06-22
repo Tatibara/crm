@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 Modal.setAppElement(document.getElementById('app'));
 
 const DetailsModal = props => (
-  <Modal isOpen={props.isOpen} contentLabel="Tasks Details" onRequestClose={props.closeTaskDetailsModal}>
+  <Modal isOpen={props.isOpen} contentLabel="Tasks Details" onRequestClose={props.closeTaskDetailsModal} closeTimeoutMS={200} className="modal">
     <h3>Tasks Details</h3>
     <p>Details: {props.taskName}</p>
     <button onClick={props.closeTaskDetailsModal}>Close</button>
