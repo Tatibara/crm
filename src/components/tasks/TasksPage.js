@@ -2,7 +2,7 @@ import React from 'react';
 import AddTask from './AddTask';
 import Tasks from './Tasks';
 
-export default class CRMApp extends React.Component {
+export default class CRMPage extends React.Component {
   state = {
     tasks: []
   };

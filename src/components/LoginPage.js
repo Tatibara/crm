@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-const App = ({ values, touched, errors, isSubmitting }) => (
+const LoginPage = ({ values, touched, errors, isSubmitting }) => (
   /*  <form onSubmit={handleSubmit}>
     <p>Hallo!</p>
     <input
@@ -49,7 +49,7 @@ const App = ({ values, touched, errors, isSubmitting }) => (
   </Form>
 );
 
-const FormikApp = withFormik({
+const FormikLoginPage = withFormik({
   mapPropsToValues({ email, password, newsletter, plan }) {
     return {
       email: email || '',
@@ -77,9 +77,6 @@ const FormikApp = withFormik({
       setSubmitting(false);
     }, 2000);
   }
-})(App);
+})(LoginPage);
 
-ReactDOM.render(
-  <FormikApp email="taty@baradari-solutions.de" />,
-  document.getElementById('app')
-);
+export default FormikLoginPage;
