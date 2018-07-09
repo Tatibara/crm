@@ -22,7 +22,7 @@ const AppRouter = () => (
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />
-      <LoginPage email="dfsdf"/>
+      {/* <LoginPage email="taty@baradari-solutions.com" /> */}
     </div>
   </BrowserRouter>
 );
