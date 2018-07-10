@@ -10,18 +10,21 @@ import { addCustomer } from './actions/customers';
 import './styles/styles.scss';
 
 const customerExample = {
-  id: '123',
   number: '18-05-24',
-  name: 'Service Partner ONE GmbH',
+  createdAt: 24355436435,
+  hourlyRate: 75,
+  name: 'Service Partner ONE GmbH1',
   streetName: 'Winsstraße',
   streetNumber: '62',
   zip: '10405',
   city: 'Berlin'
 };
+
 const customerExample2 = {
-  id: '234',
   number: '18-05-24',
-  name: 'Service Partner ONE GmbH',
+  createdAt: 24355436435,
+  hourlyRate: 75,
+  name: 'Service Partner ONE GmbH2',
   streetName: 'Winsstraße',
   streetNumber: '62',
   zip: '10405',

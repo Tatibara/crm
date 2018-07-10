@@ -1,23 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import CustomerList from './CustomerList';
 
-const CustomersPage = props => (
+const CustomersPage = () => (
   <div>
-    <h1>Customers List</h1>
-    <ul>
-      {props.customers.map(customer => (
-        <li key={customer.id}>
-          <Link to="/tasks">{customer.name}</Link>{' '}
-          <Link to="/customer/edit/2">Edit</Link>
-        </li>
-      ))}
-    </ul>
+    <CustomerList />
   </div>
 );
 
-const mapStateToProps = state => ({
-  customers: state
-});
-
-export default connect(mapStateToProps)(CustomersPage);
+export default CustomersPage;

@@ -1,19 +1,60 @@
 import React from 'react';
+import moment from 'moment';
+//import 'react-dates/initialize';
+import { SingleDatePicker } from 'react-dates';
+
+import 'react-dates/lib/css/_datepicker.css';
 
 export default class CustomerForm extends React.Component {
   state = {
     number: '18-05-24',
+    createdAt: moment(),
+    datePickerFocused: false,
     hourlyRate: '70,00',
     name: 'Service Partner ONE GmbH',
     streetName: 'Winsstraße',
     streetNumber: '62',
     zip: '10405',
-    city: 'Berlin'
+    city: 'Berlin',
+    error: ''
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    if (!this.state.number || !this.state.hourlyRate || !this.state.name) {
+      this.setState(() => ({
+        error: 'Error! The fields Number, Name and Hourly Rate are required'
+      }));
+    } else {
+      this.setState(() => ({
+        error: ''
+      }));
+      this.props.onSubmit({
+        number: this.state.number,
+        createdAt: this.state.createdAt.valueOf(),
+        hourlyRate: parseFloat(this.state.hourlyRate.replace(',', '.'), 10),
+        name: this.state.name,
+        streetName: this.state.streetName,
+        streetNumber: this.state.streetNumber,
+        zip: this.state.zip,
+        city: this.state.city
+      });
+    }
   };
 
   handleChangeNumber = e => {
     e.persist();
     this.setState(() => ({ number: e.target.value }));
+  };
+
+  handleChangeDatePicker = createdAt => {
+    if (createdAt) {
+      this.setState(() => ({ createdAt }));
+    }
+  };
+
+  handleChangeDatePickerFocus = ({ focused }) => {
+    this.setState(() => ({ datePickerFocused: focused }));
   };
 
   handleChangeName = e => {
@@ -43,7 +84,7 @@ export default class CustomerForm extends React.Component {
 
   handleChangeHourlyRate = e => {
     const hourlyRate = e.target.value;
-    if (hourlyRate.match(/^\d+(,\d{0,2})?$/)) {
+    if (!hourlyRate || hourlyRate.match(/^\d+(,\d{0,2})?$/)) {
       this.setState(() => ({ hourlyRate }));
     }
   };
@@ -63,7 +104,8 @@ export default class CustomerForm extends React.Component {
     return (
       <div>
         <h3>Customer Form</h3>
-        <form className="form">
+        <form className="form" onSubmit={this.onSubmit}>
+          {this.state.error && <div>{this.state.error}</div>}
           <div className="form__group">
             <label htmlFor="number" className="form__label">
               Number:
@@ -72,6 +114,21 @@ export default class CustomerForm extends React.Component {
                 id="number"
                 value={this.state.number}
                 onChange={this.handleChangeNumber}
+              />
+            </label>
+          </div>
+          <div className="form__group">
+            <label htmlFor="createdAt" className="form__label">
+              Created at:
+              <SingleDatePicker
+                isRTL
+                date={this.state.createdAt} // momentPropTypes.momentObj or null
+                onDateChange={this.handleChangeDatePicker} // PropTypes.func.isRequired
+                focused={this.state.datePickerFocused} // PropTypes.bool
+                onFocusChange={this.handleChangeDatePickerFocus} // PropTypes.func.isRequired
+                id="createdAt" // PropTypes.string.isRequired,
+                numberOfMonths={1}
+                isOutsideRange={() => false}
               />
             </label>
           </div>
@@ -141,6 +198,9 @@ export default class CustomerForm extends React.Component {
                 onChange={this.handleChangeCity}
               />
             </label>
+          </div>
+          <div className="form__group">
+            <button className="btn btn--green">Add Customer</button>
           </div>
         </form>
       </div>

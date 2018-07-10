@@ -6,6 +6,7 @@ import HomePage from '../components/HomePage';
 import TasksPage from '../components/tasks/TasksPage';
 import CustomersPage from '../components/customers/CustomersPage';
 import CustomerEditPage from '../components/customers/CustomerEditPage';
+import CustomerAddPage from '../components/customers/CustomerAddPage';
 import LoginPage from '../components/LoginPage';
 import NotFoundPage from '../components/NotFoundPage';
 
@@ -15,7 +16,8 @@ const AppRouter = () => (
       <Header />
       <Switch>
         <Route path="/" component={HomePage} exact />
-        <Route path="/crm" component={CustomersPage} exact />
+        <Route path="/crm" component={CustomersPage} />
+        <Route path="/customer/add" component={CustomerAddPage} />
         <Route path="/customer/edit/:id" component={CustomerEditPage} />
         <Route path="/tasks" component={TasksPage} />
         <Route path="/login" component={LoginPage} email="taty@baradari.com" />
