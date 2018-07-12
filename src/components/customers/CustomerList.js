@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import CustomerListItem from './CustomerListItem';
 
 const CustomerList = props => (
   <div>
@@ -10,10 +11,11 @@ const CustomerList = props => (
     </div>
     <ul>
       {props.customers.map(customer => (
-        <li key={customer.id}>
-          <Link to="/tasks">{customer.name}</Link>{' '}
-          <Link to="/customer/edit/2">Edit</Link>
-        </li>
+        <CustomerListItem
+          key={customer.id}
+          id={customer.id}
+          name={customer.name}
+        />
       ))}
     </ul>
   </div>

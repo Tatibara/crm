@@ -6,18 +6,24 @@ import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 export default class CustomerForm extends React.Component {
-  state = {
-    number: '18-05-24',
-    createdAt: moment(),
-    datePickerFocused: false,
-    hourlyRate: '70,00',
-    name: 'Service Partner ONE GmbH',
-    streetName: 'Winsstraße',
-    streetNumber: '62',
-    zip: '10405',
-    city: 'Berlin',
-    error: ''
-  };
+  constructor(props) {
+    super(props);
+
+    this.createdAt = moment();
+
+    this.state = {
+      number: props.customer ? props.customer.number : this.createdAt.format('YY-MM-DD'),
+      createdAt: props.customer ? moment(props.customer.createdAt) : this.createdAt,
+      hourlyRate: props.customer ? (props.customer.hourlyRate / 100).toString() : '80,00',
+      name: props.customer ? props.customer.name : '',
+      streetName: props.customer ? props.customer.streetName : '',
+      streetNumber: props.customer ? props.customer.streetNumber : '',
+      zip: props.customer ? props.customer.zip : '',
+      city: props.customer ? props.customer.city : '',
+      error: '',
+      datePickerFocused: false
+    };
+  }
 
   onSubmit = e => {
     e.preventDefault();
@@ -29,10 +35,11 @@ export default class CustomerForm extends React.Component {
       this.setState(() => ({
         error: ''
       }));
+      console.log('streeName on Submit', this.state.streetName);
       this.props.onSubmit({
         number: this.state.number,
         createdAt: this.state.createdAt.valueOf(),
-        hourlyRate: parseFloat(this.state.hourlyRate.replace(',', '.'), 10),
+        hourlyRate: parseFloat(this.state.hourlyRate.replace(',', '.'), 10) * 100,
         name: this.state.name,
         streetName: this.state.streetName,
         streetNumber: this.state.streetNumber,
@@ -64,22 +71,23 @@ export default class CustomerForm extends React.Component {
 
   handleChangeStreetName = e => {
     e.persist();
-    this.setState(() => ({ streetName: e.target.valute }));
+    console.log('streetName', e.target.value);
+    this.setState(() => ({ streetName: e.target.value }));
   };
 
   handleChangeStreetNumber = e => {
     e.persist();
-    this.setState(() => ({ streetNumber: e.target.valute }));
+    this.setState(() => ({ streetNumber: e.target.value }));
   };
 
   handleChangeZip = e => {
     e.persist();
-    this.setState(() => ({ zip: e.target.valute }));
+    this.setState(() => ({ zip: e.target.value }));
   };
 
   handleChangeCity = e => {
     e.persist();
-    this.setState(() => ({ city: e.target.valute }));
+    this.setState(() => ({ city: e.target.value }));
   };
 
   handleChangeHourlyRate = e => {
@@ -151,7 +159,6 @@ export default class CustomerForm extends React.Component {
                 type="text"
                 value={this.state.name}
                 onChange={this.handleChangeName}
-                onFocus
               />
             </label>
           </div>
