@@ -1,8 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
-
   entry: './src/app.js',
 
   output: {
@@ -25,10 +23,4 @@ module.exports = {
     ]
   },
 
-  devtool: 'cheap-module-eval-source-map',
-
-  devServer: {
-    contentBase: path.resolve(__dirname, 'public'),
-    historyApiFallback: true
-  }
 };
