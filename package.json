@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node server/server.js",
+    "heroku-postbuild": "yarn run build:prod",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react",
     "build:dev": "webpack-dev-server --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
@@ -21,6 +23,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "express": "^4.16.3",
     "formik": "^0.11.11",
     "jest": "^23.4.0",
     "live-server": "^1.2.0",
