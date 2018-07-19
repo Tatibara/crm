@@ -20,7 +20,12 @@ const AppRouter = () => (
         <Route path="/customer/add" component={CustomerAddPage} />
         <Route path="/customer/edit/:id" component={CustomerEditPage} />
         <Route path="/tasks" component={TasksPage} />
-        <Route path="/login" component={LoginPage} email="taty@baradari.com" />
+        <Route
+          path="/login"
+          component={props => (
+            <LoginPage {...props} email="taty@baradari.com" />
+          )}
+        />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />
